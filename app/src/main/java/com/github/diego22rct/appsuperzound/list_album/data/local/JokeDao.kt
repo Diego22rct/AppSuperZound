@@ -21,7 +21,7 @@ interface AlbumDao {
     @Query("select * from albums")
     suspend fun fetchAll(): List<AlbumEntity>
 
-    @Query("select * from albums where id =:id")
-    suspend fun fetchById(id: String): JokeEntity?
+    @Query("select * from albums where idAlbum =:idAlbum")
+    suspend fun fetchById(idAlbum: String): AlbumEntity?
 
 }

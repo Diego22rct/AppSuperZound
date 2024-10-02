@@ -4,7 +4,7 @@ import androidx.room.Entity
 import androidx.room.PrimaryKey
 
 @Entity(tableName = "albums")
-data class AlbumsEntity(
+data class AlbumEntity(
     @PrimaryKey
     val idAlbum: String,
     val strAlbum: String,

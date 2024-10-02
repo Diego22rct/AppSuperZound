@@ -25,13 +25,27 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.github.diego22rct.appsuperzound.common.Constants
 import com.github.diego22rct.appsuperzound.list_album.presentation.ListAlbumScreen
 import com.github.diego22rct.appsuperzound.list_album.presentation.ListFavouriteScreen
 import com.github.diego22rct.appsuperzound.common.Screens
 import com.github.diego22rct.appsuperzound.home.presentation.HomeScreen
+import com.github.diego22rct.appsuperzound.list_album.data.remote.AlbumService
+import com.github.diego22rct.appsuperzound.list_album.data.repository.AlbumRepository
+import com.github.diego22rct.appsuperzound.list_album.presentation.ListAlbumViewModel
 import com.github.diego22rct.appsuperzound.ui.theme.AppSuperZoundTheme
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
 class MainActivity : ComponentActivity() {
+    private val listAlbumService: AlbumService = Retrofit
+    .Builder()
+    .baseUrl(Constants.BASE_URL)
+    .addConverterFactory(GsonConverterFactory.create())
+    .build()
+    .create(AlbumService::class.java)
+    private val repositoryListAlbum = AlbumRepository(listAlbumService)
+    private val listAlbumViewModel = ListAlbumViewModel(repositoryListAlbum)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -88,7 +102,7 @@ class MainActivity : ComponentActivity() {
                             HomeScreen()
                         }
                         composable(route = Screens.ListAlbumScreen.route) {
-                            ListAlbumScreen()
+                            ListAlbumScreen(listAlbumViewModel)
                         }
                         composable(route = Screens.ListFavouriteAlbumScreen.route) {
                             ListFavouriteScreen()
