@@ -5,5 +5,6 @@ data class Album(
     val strAlbum: String,
     val strArtist: String,
     val strAlbumThumb: String,
-    val intScore: String
+    val intScore: String,
+    var isFavorite: Boolean = false
 )
