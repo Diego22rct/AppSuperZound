@@ -1,4 +1,4 @@
-package com.github.diego22rct.appsuperzound.ListAlbum.presentation
+package com.github.diego22rct.appsuperzound.list_album.presentation
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
